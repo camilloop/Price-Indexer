@@ -8,16 +8,25 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 import org.springframework.data.domain.Pageable;
 import java.util.List;
 
-public interface PriceColletorRepository extends ElasticsearchRepository<PriceCollector, String> {
+public interface PriceCollectorRepository extends ElasticsearchRepository<PriceCollector, String> {
     List<PriceCollector> findAllByProductName(String productName);
     List<PriceCollector> findAllByWebsiteName(String productName);
     List<PriceCollector> findByProductName(String productName, Pageable pageable);
+    List<PriceCollector> findByProductName(String productName);
 
     /**
      * findFist and FindTop don't work with elasticsearch
      */
-    default List<PriceCollector> findFirstByProductNameOrderByPriceAsc(String productName) {
+    default PriceCollector findFirstByProductNameOrderByPriceAsc(String productName) {
         Sort sort = new Sort(Sort.Direction.ASC, "price");
-        return this.findByProductName(productName, PageRequest.of(0, 1, sort));
+        return this.findByProductName(productName, PageRequest.of(0, 1, sort)).get(0);
+    }
+
+    /**
+     * findFist and FindTop don't work with elasticsearch
+     */
+    default PriceCollector findFirstByProductNameOrderByPriceDesc(String productName) {
+        Sort sort = new Sort(Sort.Direction.DESC, "price");
+        return this.findByProductName(productName, PageRequest.of(0, 1, sort)).get(0);
     }
 }
