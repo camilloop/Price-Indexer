@@ -7,7 +7,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 
 @RestController
@@ -34,7 +33,7 @@ public class WebsiteController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> saveWebiste(@RequestBody Website website) {
+    public ResponseEntity<?> saveWebsite(@RequestBody Website website) {
         Website save = websiteRepository.save(website);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

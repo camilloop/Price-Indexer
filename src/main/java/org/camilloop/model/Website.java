@@ -9,6 +9,8 @@ public class Website {
     @Id
     private String name;
 
+    private String url;
+
     private String namePattern;
 
     private String pricePattern;
@@ -18,8 +20,9 @@ public class Website {
     public Website() {
     }
 
-    public Website(String name, String namePattern, String pricePattern, int maxDepth) {
+    public Website(String name, String url, String namePattern, String pricePattern, int maxDepth) {
         this.name = name;
+        this.url = url;
         this.namePattern = namePattern;
         this.pricePattern = pricePattern;
         this.maxDepth = maxDepth;
@@ -31,6 +34,14 @@ public class Website {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getNamePattern() {
@@ -61,6 +72,7 @@ public class Website {
     public String toString() {
         return "Website{" +
                 "name='" + name + '\'' +
+                ", url='" + url + '\'' +
                 ", namePattern='" + namePattern + '\'' +
                 ", pricePattern='" + pricePattern + '\'' +
                 ", maxDepth=" + maxDepth +
