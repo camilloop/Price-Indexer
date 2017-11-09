@@ -38,8 +38,8 @@ public class Extractor {
                     productsList.add(count[0], product);
                     this.count[0]++;
                 }
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
+            } catch (IOException | IllegalArgumentException e) {
+                System.err.println("For '" + x + "': " + e.getMessage());
             }
         });
         return this.productsList;
