@@ -31,13 +31,13 @@ public class WebCrawler {
                 this.links.add(url);
 
                 Document document = Jsoup.connect(url).get();
-                Elements linksOnPage = document.select("a[href^=\"" + url + "\"]");
+                Elements linksOnPage = document.select("a[href~=(" + this.url + ")|(^/)]");
 
                 depth++;
                 for (Element page : linksOnPage) {
                     this.getPageLinks(page.attr("abs:href"), depth);
                 }
-            } catch (IOException e) {
+            } catch (IOException | IllegalArgumentException e) {
                 System.err.println("For '" + url + "': " + e.getMessage());
             }
         }
