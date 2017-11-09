@@ -4,6 +4,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -12,6 +14,7 @@ public class WebCrawler {
     private String url;
     private int maxDepth;
     private HashSet<String> links;
+    private static final Logger logger = LoggerFactory.getLogger(WebCrawler.class);
 
     public WebCrawler(String url, int maxDepth) {
         this.url = url;
@@ -38,7 +41,7 @@ public class WebCrawler {
                     this.getPageLinks(page.attr("abs:href"), depth);
                 }
             } catch (IOException | IllegalArgumentException e) {
-                System.err.println("For '" + url + "': " + e.getMessage());
+                logger.warn("For '" + url + "': " + e);
             }
         }
     }

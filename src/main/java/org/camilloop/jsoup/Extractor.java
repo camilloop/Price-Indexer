@@ -3,6 +3,8 @@ package org.camilloop.jsoup;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.*;
@@ -16,6 +18,7 @@ public class Extractor {
     public static final String PRODUCT_PRICE = "product_price";
     public static final String URL = "url";
     private final int[] count = {0};
+    private static final Logger logger = LoggerFactory.getLogger(WebCrawler.class);
 
     public Extractor() {
     }
@@ -39,7 +42,7 @@ public class Extractor {
                     this.count[0]++;
                 }
             } catch (IOException | IllegalArgumentException e) {
-                System.err.println("For '" + x + "': " + e.getMessage());
+                logger.warn("For '" + x + "': " + e);
             }
         });
         return this.productsList;
