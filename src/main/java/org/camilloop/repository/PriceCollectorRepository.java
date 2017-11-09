@@ -13,6 +13,7 @@ public interface PriceCollectorRepository extends ElasticsearchRepository<PriceC
     List<PriceCollector> findAllByWebsiteName(String productName);
     List<PriceCollector> findByProductName(String productName, Pageable pageable);
     List<PriceCollector> findByProductName(String productName);
+    void deleteAllByWebsiteName(String websiteName);
 
     /**
      * findFist and FindTop don't work with elasticsearch
