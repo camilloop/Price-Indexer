@@ -43,6 +43,7 @@ public class WebsiteController {
         return ResponseEntity.created(location).body(save);
     }
 
+    @CrossOrigin
     @DeleteMapping("/{name}")
     public ResponseEntity<Void> deleteWebsiteByName(@PathVariable String name) {
         websiteRepository.deleteById(name);
